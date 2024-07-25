@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delicious Restaurant</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em;
+        }
+
+        nav {
+            background-color: #f2f2f2;
+            padding: 1em;
+            text-align: center;
+        }
+
+        section {
+            margin: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        article {
+            margin-bottom: 20px;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1> Restaurant</h1>
+    </header>
+
+    <nav>
+        <a href="#menu">Menu</a> |
+        <a href="#order">Order Online</a> |
+        <a href="#contact">Contact Us</a>
+    </nav>
+
+    <section id="menu">
+        <h2>Menu</h2>
+
+        <article>
+            <h3>Burger</h3>
+            <p>Delicious beef patty with fresh veggies.</p>
+            <p>Price: $8.99</p>
+            <button onclick="addToCart('Burger', 8.99)">Add to Cart</button>
+        </article>
+
+        <article>
+            <h3>Pasta</h3>
+            <p>Classic Italian pasta with tomato sauce.</p>
+            <p>Price: $10.99</p>
+            <button onclick="addToCart('Pasta', 10.99)">Add to Cart</button>
+        </article>
+    </section>
+
+    <section id="order">
+        <h2>Order Online</h2>
+        <p>Your Cart:</p>
+        <ul id="cart">
+            <!-- Cart items will be displayed here -->
+        </ul>
+        <p>Total: $<span id="total">0.00</span></p>
+        <button onclick="checkout()">Checkout</button>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>Email: info@deliciousrestaurant.com</p>
+        <p>Phone: +1 (555) 123-4567</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Delicious Restaurant</p>
+    </footer>
+
+    <script>
+        let cart = [];
+        let total = 0;
+
+        function addToCart(item, price) {
+            cart.push({ item, price });
+            total += price;
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartList = document.getElementById('cart');
+            const totalElement = document.getElementById('total');
+            cartList.innerHTML = '';
+            cart.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${item.item} - $${item.price.toFixed(2)}`;
+                cartList.appendChild(listItem);
+            });
+            totalElement.textContent = total.toFixed(2);
+        }
+
+        function checkout() {
+            alert(`Total: $${total.toFixed(2)}\nThank you for your order!`);
+            // Clear the cart after checkout
+            cart = [];
+            total = 0;
+            updateCart();
+        }
+    </script>
+</body>
+
+</html>
+
